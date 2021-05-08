@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+						<form action="{% url 'send_message' %}"method="POST" class="col-md-12">
+							{% csrf_token %}
+							<div class="row">
+								<div class="col-md-3" text-center>
+									Изображение
+								</div>
+								<div class="col-md-3" text-center>
+									Название
+								</div>
+								<div class="col-md-3" text-center>
+									Количество
+								</div>
+								<div class="col-md-3" text-center>
+									Цена
+								</div>
+							</div>
+
+							{% for item in cart.items.all %}
+							<div class="row">
+								<div class="col-md-3" text-center>
+									<img class="img-responsive" src="{{item.product.image.url}}" alt="">
+								</div>
+								<div class="col-md-3" text-center>
+									<h4>{{item.product.name}}</h4>
+								</div>
+								<div class="col-md-3" text-center>
+									{{item.quantity}}
+								</div>
+								<div class="col-md-3" text-center>
+									{{item.item_total}}
+								</div>
+							</div>
+							{% endfor %}
+
+							<div class="row">
+								<div class="col-md-6 name">
+									<input id="name" type="text" placeholder="Укажите ваше имя">
+								</div>
+								<div class="col-md-6 phone">
+									<input id="phone" type="text" placeholder="Укажите ваш телефон">
+								</div>
+								<div class="col-md-6 mail">
+									<input id="email" type="text" placeholder="Укажите вашу почту">
+								</div>
+								<div class="col-md-6 adress">
+									<input id="adress" type="text" placeholder="Укажите ваш адресс">
+								</div>
+							</div>
+							<input type="submit">
+						</form>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+{% endblock content %}
